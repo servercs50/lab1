@@ -52,7 +52,7 @@ nav li a {
     overflow: hidden;
     font-style: italic;
 }
-.side {
+.side_left {
     padding: 1%;
     width: 200px;
     height: 100%;
@@ -78,6 +78,37 @@ nav li a {
 }
 
 .user_name {
+    padding-left: 1px;
+    float: left;
+    width: 80%;
+    line-height: 48px;
+}
+.side_right {
+    padding: 1%;
+    width: 200px;
+    height: 100%;
+    float: right;
+    padding-top: 1%;
+    background-color: burlywood;
+}
+.new {
+    display: flex;
+    height: 48px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.new_avatar {
+    float: left;
+
+}
+
+.new_avatar > img {
+    height: 48px;
+    width: 48px;
+}
+
+.new_name {
     padding-left: 1px;
     float: left;
     width: 80%;
