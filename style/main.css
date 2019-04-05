@@ -52,14 +52,16 @@ nav li a {
     overflow: hidden;
     font-style: italic;
 }
+
 .side_left {
     padding: 1%;
-    width: 200px;
+    width: 15%;
     height: 100%;
     float: left;
     padding-top: 1%;
     background-color: burlywood;
 }
+
 .user {
     display: flex;
     height: 48px;
@@ -83,14 +85,16 @@ nav li a {
     width: 80%;
     line-height: 48px;
 }
+
 .side_right {
     padding: 1%;
-    width: 200px;
+    width: 15%;
     height: 100%;
     float: right;
     padding-top: 1%;
     background-color: burlywood;
 }
+
 .new {
     display: flex;
     height: 48px;
@@ -113,4 +117,13 @@ nav li a {
     float: left;
     width: 80%;
     line-height: 48px;
+
+}
+
+.content {
+    float: left;
+    background-color: azure;
+    width: 66%;
+    height: 685px;
+    margin: 0 auto;
 }
