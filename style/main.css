@@ -6,6 +6,7 @@
 
 body {
     background-color: cornflowerblue;
+    height: 100vh;
 }
 
 a {
@@ -13,10 +14,11 @@ a {
 }
 
 header {
-    height: 64px;
+    width: 100%;
+    display: inline-block;
     background-color: blanchedalmond;
     position: relative;
-    padding: 1%;
+    padding: 0 2%;
 }
 
 .logo {
@@ -32,7 +34,7 @@ nav ul {
 
 nav li {
     display: inline-block;
-    margin-right: 30px;
+    margin-right: 15px;
 }
 
 nav li a {
@@ -41,22 +43,38 @@ nav li a {
     letter-spacing: 1px;
     color: black;
     text-transform: uppercase;
+    font-size: 14px;
+}
+
+#menu-toggle {
+    float: right;
+    width: 46px;
+    height: 46px;
+    margin: 10px 0;
+    background-color: white;
+    display: none;
+    cursor: pointer;
+}
+
+.display-menu {
+    display: block;
 }
 
 #search {
-    display: inline-block;
-    height: 30px;
-    margin: 19px;
+    height: 48px;
+    margin: 10px 0;
     float: right;
-    width: 200px;
-    padding-left: 5px;
-    overflow: hidden;
+    width: 25%;
     font-style: italic;
 }
 
-.side_left {
+.container {
+    height: calc(100vh - 72px);
+}
+
+.side {
     padding: 1%;
-    width: 15%;
+    width: 200px;
     height: 100%;
     float: left;
     padding-top: 1%;
@@ -81,61 +99,72 @@ nav li a {
 }
 
 .user_name {
-    padding-left: 1px;
+    padding-left: 5%;
     float: left;
     width: 80%;
     line-height: 48px;
-}
-
-.side_right {
-    padding: 1%;
-    width: 15%;
-    height: 100%;
-    float: right;
-    padding-top: 1%;
-    background-color: burlywood;
-}
-
-.new {
-    display: flex;
-    height: 48px;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.new_avatar {
-    float: left;
-
-}
-
-.new_avatar > img {
-    height: 48px;
-    width: 48px;
-}
-
-.new_name {
-    padding-left: 1px;
-    float: left;
-    width: 80%;
-    line-height: 48px;
-
 }
 
 .content {
+    background-color: blueviolet;
+    width: calc(100% - 200px);
+    height: 100%;
     float: left;
-    background-color: azure;
-    width: 66%;
-    height: 685px;
-    margin: 0 auto;
+}
+
+.main {
+    width: calc(100% - 350px);
+    height: 100%;
+    float: left;
+    padding: 1%;
+}
+
+.new_content {
+    width: 100%;
+    background-color: yellowgreen;
+}
+
+.new_content > img {
+    width: 100%;
+    height: 100%;
+}
+
+.new_description {
+    height: 70px;
+    background-color: white;
+    padding: 2%;
+}
+
+.chat {
+    position: relative;
+    padding: 1%;
+    width: 350px;
+    height: 100%;
+    float: left;
+    background-color: darkseagreen;
+}
+
+.chat-messages {
+    height: 94%;
+}
+
+.chat-message {
+    margin-bottom: 3%;
+}
+
+
+.input-message > input {
+    width: 100%;
+    height: 60px;
 }
 
 @media (max-width: 1280px) {
-    .side_left {
+    .side {
         background-color: aquamarine;
-        width: 48px;
+        width: 70px;
     }
 
-    .side_left_header {
+    .side_header {
         display: none;
     }
 
@@ -144,23 +173,9 @@ nav li a {
     }
 
     .content {
-        width: calc(100% - 96px);
-    }
-
-    .side_right {
-        background-color: aquamarine;
-        width: 48px;
-    }
-
-    .side_right_header {
-        display: none;
-    }
-
-    .new_name {
-        display: none;
+        width: calc(100% - 70px);
     }
 }
-
 
 @media (max-width: 1000px) {
 
@@ -202,6 +217,25 @@ nav li a {
         overflow-y: scroll;
     }
 
+    .main {
+        width: 100%;
+        height: auto;
+        margin-bottom: 3%;
+        padding: 0;
+    }
+
+    .new_description {
+        height: 100px;
+    }
+
+    .chat {
+        width: 100%;
+        height: auto;
+    }
+
+    .chat-messages {
+        height: auto;
+    }
 }
 
 @media (max-width: 540px) {
@@ -212,3 +246,4 @@ nav li a {
     .content {
         width: 100%;
     }
+}
