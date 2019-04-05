@@ -52,3 +52,34 @@ nav li a {
     overflow: hidden;
     font-style: italic;
 }
+.side {
+    padding: 1%;
+    width: 200px;
+    height: 100%;
+    float: left;
+    padding-top: 1%;
+    background-color: burlywood;
+}
+.user {
+    display: flex;
+    height: 48px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.user_avatar {
+    float: left;
+
+}
+
+.user_avatar > img {
+    height: 48px;
+    width: 48px;
+}
+
+.user_name {
+    padding-left: 1px;
+    float: left;
+    width: 80%;
+    line-height: 48px;
+}
