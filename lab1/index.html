@@ -124,17 +124,20 @@
     </div>
     <script>
         let resizeNew = function() {
-            let streamNew = document.getElementById('stream_video');
+            let streamNew = document.getElementById('stream_new');
             let streamNewWidth = streamNew.offsetWidth;
             let streamNewHeight = streamVideo.offsetWidth / 16 * 9;
             streamNew.style.height = streamNewHeight + 'px';
             console.log(streamNewWidth);
         }
-        document.addEventListener("DOMContentLoaded", resizeVideo);
-        window.addEventListener("resize", resizeVideo);
+        document.addEventListener("DOMContentLoaded", resizeNew);
+        window.addEventListener("resize", resizeNew);
         let displayMenu = document.getElementById('menu-toggle');
         displayMenu.addEventListener("click", function() {
             document.getElementById('menu').classList.toggle('display-menu');
         });
+
     </script>
-</body></html>
+</body>
+
+</html>
