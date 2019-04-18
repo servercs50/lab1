@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Коллажы</title>
+
+</head>
+
+<body>
+    <script>
+        //        функция получения цитаты
+        let getQoute = function() {
+            return fetch('http://fizmatspb.ru/itmoweb/lab3/requester.php');
+        }
+        //        функция загрузки изображения с заданным размером
+        let getPhoto = function(photoSize) {
+            const photoWidth = photoSize[0],
+                photoHeight = photoSize[1];
+            const numImagesAvailable = 331; //количество картинок на сайте
+            let randomImageIndex = Math.floor(Math.random() * numImagesAvailable);
+            //задаем рандомный индекс картинки, floor - округдели, random - рандомное число от 0 до 1
+            return fetch(`https://source.unsplash.com/collection/357786/${photoWidth}x${photoHeight}/?sig=${randomImageIndex}`); //делаем запрос на url 
+        }
+        let waitMsg = document.createElement('h1'); //создаем переменную waitMsg - ждать сообщения, задаем ей тег h1
+        waitMsg.innerHTML = "Подождите, пока генерируется коллаж.";
+        document.body.appendChild(waitMsg);
+        let canvas = document.createElement('canvas');
+        canvas.setAttribute('id', 'collage');
+        canvas.width = 640;
+        canvas.height = 480;
+        document.body.appendChild(canvas);
+        var ctx = canvas.getContext("2d"); // 
+        ctx.filter = "drop-shadow(10px 10px 10px)"; //добавляем тень
+        photoSizes = [
+            [320, 240],
+            [320, 240],
+            [320, 240],
+            [320, 240],
+        ]
+        photoPins = [
+            [0, 0], // левый верхний угол
+            [320, 0],
+            [0, 240],
+            [320, 240],
+        ]
+        //            Получаем картинки нужных размеров
+        Promise.all(photoSizes.map(getPhoto))
+            .then(photos => {
+                for (let i = 0; i < photos.length; i++) {
+                    photos[i].pin = photoPins[i];
+                }
+                //                    Отрисовываем полученные картинки в их области
+                Promise.all(photos.map((photo) => {
+                    let img = new Image();
+                    console.log(photo.url, photo.pin[0], photo.pin[1]);
+                    img.onload = function() {
+                        ctx.drawImage(img, photo.pin[0], photo.pin[1]);
+                    }
+                    img.crossOrigin = 'anonymous';
+                    img.src = photo.url;
+                }));
+                //                Ищем цитату и рисуем ее поверх картинок
+            }).then(() => {
+                return getQoute()
+                    .then((response) => {
+                        return response.text();
+                    })
+                    .then((quote) => {
+                        console.log(quote);
+                        quoteLengthPX = ctx.measureText(quote).width;
+                        ctx.font = "700 30px Comic Sans MS";
+                        ctx.fillStyle = '#fff';
+                        ctx.textAlign = 'center';
+                        const words = quote.split(' ');
+                        let line = "";
+                        let lines = [];
+                        for (let i = 0; i < words.length; i++) {
+                            let testLine = line + words[i] + " ";
+                            let testWidth = ctx.measureText(testLine).width;
+                            if (testWidth > 4 / 5 * canvas.width) {
+                                lines.push(line);
+                                line = words[i] + " ";
+                            } else {
+                                line = testLine;
+                            }
+                        }
+                        lines.push(line);
+                        const lineHeight = 30;
+                        let marginTop = canvas.height / 2 - lines.length / 2 * lineHeight;
+                        for (let i = 0; i < lines.length; i++) {
+                            ctx.fillText(lines[i], canvas.width / 2, marginTop);
+                            marginTop += lineHeight;
+                        }
+                    })
+                    .catch((err) => console.error(err));
+            }).then(() => {
+                waitMsg.hidden = 'true';
+                var dataURL = canvas.toDataURL("image/png");
+                var link = document.createElement("a");
+                link.innerHTML = "Скачать";
+                link.href = dataURL;
+                link.download = new Date().getTime();
+                document.body.appendChild(link);
+            });
+    </script>
+</body></html>
